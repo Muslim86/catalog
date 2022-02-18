@@ -10,7 +10,7 @@ const Header: React.FC = () => (
         to="/"
         className={classes.link}
       >
-        Главная
+        Не главная
       </NavLink>
 
       <NavLink
