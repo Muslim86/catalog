@@ -14,6 +14,10 @@ const service = {
   sortCategories(categories: Category[]): Category[] {
     return _.sortBy(categories, [(category) => category.strCategory]);
   },
+
+  sortHeaders(categories: Category[], key: string[], index: number): Category[] {
+    return _.sortBy(categories, [key[index + 1]]);
+  },
 };
 
 export default service;

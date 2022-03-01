@@ -19,9 +19,13 @@ describe('Компонент CatalogItem', () => {
     expect(renderComponent).not.toThrow();
   });
 
-  it('отображает переданные данные', () => {
+  it('отображает категорию', () => {
     renderComponent({ strCategory: 'Milk', strCategoryDescription: 'Some Descr', strCategoryThumb: './img' });
     expect(screen.getByText('Milk')).toBeInTheDocument();
-    expect(screen.getByText('Some Descr')).toBeInTheDocument();
+  });
+
+  it('отображает описание', () => {
+    renderComponent({ strCategory: 'Milk', strCategoryDescription: 'Some Descr', strCategoryThumb: './img' });
+    expect(screen.getByText(/Some Descr/)).toBeInTheDocument();
   });
 });

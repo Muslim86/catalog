@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, toJS } from 'mobx';
 
 import service from './catalogListStore.service';
 import { Category } from '../../models/Category';
@@ -15,6 +15,8 @@ class CatalogListStore {
   searchQuery: string | undefined;
 
   isFiltered = false;
+
+  isSorted = false;
 
   countVisibleItems = 3;
 
@@ -38,6 +40,12 @@ class CatalogListStore {
   sortCategories() {
     if (this.categories) {
       this.categories = service.sortCategories(this.categories);
+    }
+  }
+
+  sortHeaders(keys: string[], index: number) {
+    if (this.categories) {
+      this.categories = service.sortHeaders(toJS(this.categories), keys, index);
     }
   }
 

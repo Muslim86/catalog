@@ -4,11 +4,11 @@ import _ from 'lodash';
 
 import styles from './CatalogList.module.scss';
 import catalogListStore from '../../stores/catalogListStore';
-import CatalogItem from '../CatalogItem';
 import SearchLine from '../SearchLine';
 import { Category } from '../../models/Category';
 import Error from '../Error';
 import Loading from '../Loading';
+import ViewModelsPanel from '../ViewModelsPanel';
 
 type CatalogTypes = {
   store: typeof catalogListStore;
@@ -16,8 +16,9 @@ type CatalogTypes = {
 
 const CatalogList: React.FC<CatalogTypes> = observer((props) => {
   const { store } = props;
-  const [items, setItems] = useState<Array<Category>>();
+  const [items, setItems] = useState<Category[]>();
   const [search, setSearch] = useState('');
+  const [currentViewModel, setCurrentViewModel] = useState<JSX.Element>();
   const isFiltered = search.length > 3;
 
   useEffect(() => {
@@ -31,26 +32,24 @@ const CatalogList: React.FC<CatalogTypes> = observer((props) => {
     if (isFiltered) {
       setItems(store.categories?.filter((elem) => elem.strCategory.startsWith(search)));
       store.isFiltered = true;
-    } else {
+    } else if (!store.isSorted) {
       setItems(_.chunk(store.categories, store.countVisibleItems)[0]);
       store.isFiltered = false;
     }
-  }, [search, isFiltered, store.countVisibleItems, store]);
+  }, [search, isFiltered, store.countVisibleItems, store, store.categories]);
 
   return (
     <div className={store.isVisible ? styles.component : styles.hidden}>
-      {store.fetchError ? <Error /> : null }
+      {store.fetchError ? <Error /> : null}
       {store.isFetching && !store.fetchError ? <Loading /> : null}
       <div className={store.isFetching || store.fetchError ? styles.hidden : styles.body}>
         <SearchLine store={store} setSearch={setSearch} />
-        {items?.map((elem) => (
-          <CatalogItem
-            key={elem.idCategory}
-            strCategory={elem.strCategory}
-            strCategoryThumb={elem.strCategoryThumb}
-            strCategoryDescription={elem.strCategoryDescription}
-          />
-        ))}
+        <ViewModelsPanel
+          items={items}
+          headers={['Название', 'Картинка', 'Описание']}
+          setCurrentViewModel={setCurrentViewModel}
+        />
+        {currentViewModel}
         {!isFiltered && !store.isMaxCountVisibleItems
           ? <button type="button" onClick={() => store.addCountVisibleItems()}>Показать ещё</button> : null}
       </div>
