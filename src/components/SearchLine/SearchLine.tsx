@@ -15,9 +15,11 @@ const SearchLine: React.FC<SearchLineProps> = observer((props) => {
   };
 
   return (
-    <textarea onChange={changeHandle} className={styles.component}>
-      {props?.store?.searchQuery}
-    </textarea>
+    <div className={styles.component}>
+      <textarea onChange={changeHandle} rows={1} placeholder="Фильтрация">
+        {props?.store?.searchQuery}
+      </textarea>
+    </div>
   );
 });
 

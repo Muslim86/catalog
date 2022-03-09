@@ -51,7 +51,11 @@ const CatalogList: React.FC<CatalogTypes> = observer((props) => {
         />
         {currentViewModel}
         {!isFiltered && !store.isMaxCountVisibleItems
-          ? <button type="button" onClick={() => store.addCountVisibleItems()}>Показать ещё</button> : null}
+          ? (
+            <div>
+              <button type="button" className={styles.showMore} onClick={() => store.addCountVisibleItems()}>Показать ещё</button>
+            </div>
+          ) : null}
       </div>
     </div>
   );

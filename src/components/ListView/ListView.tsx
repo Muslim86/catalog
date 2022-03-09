@@ -11,17 +11,19 @@ type ListViewProps = {
 const ListView: React.FC<ListViewProps> = (props) => {
   const { items } = props;
   return (
-    <ul className={styles.component}>
-      {items && items.map((elem) => (
-        <li key={elem.idCategory}>
-          <CatalogItem
-            strCategory={elem.strCategory}
-            strCategoryThumb={elem.strCategoryThumb}
-            strCategoryDescription={elem.strCategoryDescription}
-          />
-        </li>
-      ))}
-    </ul>
+    <div className={styles.component}>
+      <ul>
+        {items && items.map((elem) => (
+          <li key={elem.idCategory}>
+            <CatalogItem
+              strCategory={elem.strCategory}
+              strCategoryThumb={elem.strCategoryThumb}
+              strCategoryDescription={elem.strCategoryDescription}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

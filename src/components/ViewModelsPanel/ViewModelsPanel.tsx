@@ -15,6 +15,7 @@ type ViewModelsPanelProps = {
 const ViewModelsPanel: React.FC<ViewModelsPanelProps> = (props) => {
   const { items, headers, setCurrentViewModel } = props;
   const [currentModel, setCurrentModel] = useState<string>();
+  const [activeButton, setActiveButton] = useState<string>();
   let counter = 0;
 
   const createViewModel = useMemo(() => (
@@ -55,7 +56,9 @@ const ViewModelsPanel: React.FC<ViewModelsPanelProps> = (props) => {
         <button
           type="button"
           key={elem.id}
+          className={activeButton === elem.name ? styles.active : undefined}
           onClick={() => {
+            setActiveButton(elem.name);
             setCurrentModel(elem.name);
             setCurrentViewModel(elem.component(items));
           }}

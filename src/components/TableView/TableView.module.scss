@@ -4,5 +4,21 @@
 thead {
   tr {
     cursor: pointer;
+    box-shadow: 0 0 3px #0057FF;
+    margin: 10px;
+    th {
+      padding: 10px;
+    }
+  }
+}
+
+tbody {
+
+  tr {
+    background-color: white;
+    box-shadow: 0 0 3px #0057FF;
+    td {
+      padding: 10px;
+    }
   }
 }

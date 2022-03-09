@@ -19,6 +19,12 @@ const Header: React.FC = () => (
       >
         Каталог
       </NavLink>
+      <NavLink
+        to="/about"
+        className={classes.link}
+      >
+        О проекте
+      </NavLink>
     </nav>
   </header>
 );
