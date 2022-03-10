@@ -1,4 +1,5 @@
 .component {
+  width: 100%;
 }
 
 thead {
@@ -13,12 +14,20 @@ thead {
 }
 
 tbody {
-
+  width: 100%;
   tr {
     background-color: white;
     box-shadow: 0 0 3px #0057FF;
-    td {
+    td:nth-child(1) {
+      width: 10%;
       padding: 10px;
+
+    }
+
+    td {
+      img {
+        width: 80%;
+      }
     }
   }
 }

@@ -1,2 +1,0 @@
-# muslim-temirkhanov-web
-
